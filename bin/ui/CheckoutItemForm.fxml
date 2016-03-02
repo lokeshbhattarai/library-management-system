@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -13,12 +14,18 @@
       <TextField fx:id="textFieldBookIsbn" layoutX="122.0" layoutY="69.0" />
       <Button layoutX="307.0" layoutY="36.0" mnemonicParsing="false" onAction="#checkAvailabiltyForCheckout" text="Check Availability" />
       <Button layoutX="312.0" layoutY="74.0" mnemonicParsing="false" onAction="#resetInputFields" text="Reset" />
-      <Label fx:id="labelBookTitle" layoutX="17.0" layoutY="115.0" text="Book Title" visible="false" />
-      <Label fx:id="labelBookName" layoutX="108.0" layoutY="108.0" prefHeight="25.0" prefWidth="461.0" text="Introduction to Java" visible="false" />
+      <Label fx:id="labelBookTitle" layoutX="17.0" layoutY="115.0" text="Book Title" visible="false">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+      <Label fx:id="labelBookName" layoutX="108.0" layoutY="108.0" prefHeight="25.0" prefWidth="461.0" text="Introduction to Java" visible="false">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
       <Label fx:id="labelAuthor" layoutX="17.0" layoutY="148.0" text="Author(s)" visible="false" />
       <ListView fx:id="listAuthor" layoutX="11.0" layoutY="167.0" prefHeight="200.0" prefWidth="183.0" visible="false" />
       <Label fx:id="labelCopies" layoutX="295.0" layoutY="147.0" text="Copies Available" visible="false" />
       <ListView fx:id="listBookCopy" layoutX="264.0" layoutY="169.0" prefHeight="200.0" prefWidth="200.0" visible="false" />
-      <Button fx:id="buttonCheckout" layoutX="366.0" layoutY="376.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="98.0" text="Checkout" visible="false" />
+      <Button fx:id="buttonCheckout" layoutX="366.0" layoutY="376.0" mnemonicParsing="false" onAction="#checkOutBook" prefHeight="33.0" prefWidth="98.0" text="Checkout" visible="false" />
    </children>
 </AnchorPane>

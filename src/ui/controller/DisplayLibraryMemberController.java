@@ -62,7 +62,7 @@ public class DisplayLibraryMemberController {
                 ObservableValue<String>>() {
 					@Override
 					public ObservableValue<String> call(CellDataFeatures<LibraryMemberDto, String> data){
-						StringProperty p = new SimpleStringProperty(data.getValue().getAddress().getState());
+						StringProperty p = new SimpleStringProperty(data.getValue().getAddressDto().getState());
 						return p;
 					}
 					});
@@ -70,7 +70,7 @@ public class DisplayLibraryMemberController {
                 ObservableValue<String>>() {
 					@Override
 					public ObservableValue<String> call(CellDataFeatures<LibraryMemberDto, String> data){
-						StringProperty p = new SimpleStringProperty(data.getValue().getAddress().getCity());
+						StringProperty p = new SimpleStringProperty(data.getValue().getAddressDto().getCity());
 						return p;
 					}
 					});
@@ -78,7 +78,7 @@ public class DisplayLibraryMemberController {
                 ObservableValue<String>>() {
 					@Override
 					public ObservableValue<String> call(CellDataFeatures<LibraryMemberDto, String> data){
-						StringProperty p = new SimpleStringProperty(data.getValue().getAddress().getStreet());
+						StringProperty p = new SimpleStringProperty(data.getValue().getAddressDto().getStreet());
 						return p;
 					}
 					});
@@ -86,7 +86,7 @@ public class DisplayLibraryMemberController {
                 ObservableValue<String>>() {
 					@Override
 					public ObservableValue<String> call(CellDataFeatures<LibraryMemberDto, String> data){
-						StringProperty p = new SimpleStringProperty(data.getValue().getAddress().getZipCode());
+						StringProperty p = new SimpleStringProperty(data.getValue().getAddressDto().getZipCode());
 						return p;
 					}
 					});

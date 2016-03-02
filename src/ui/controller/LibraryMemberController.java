@@ -49,11 +49,11 @@ public class LibraryMemberController {
 		this.memberToEdit = member;
 		this.firstName.setText(member.getFirstName());
 		this.lastName.setText(member.getLastName());
-		this.phoneNo.setText(member.getPhoneNo());
-		this.state.setText(member.getAddress().getState());
-		this.city.setText(member.getAddress().getCity());
-		this.street.setText(member.getAddress().getStreet());
-		this.zipCode.setText(member.getAddress().getZipCode());
+		this.phoneNo.setText(member.getPhoneNumber());
+		this.state.setText(member.getAddressDto().getState());
+		this.city.setText(member.getAddressDto().getCity());
+		this.street.setText(member.getAddressDto().getStreet());
+		this.zipCode.setText(member.getAddressDto().getZipCode());
 	}
 
 	public void addLibraryMember(){
@@ -81,7 +81,7 @@ public class LibraryMemberController {
 				this.state.getText().trim(),
 				this.zipCode.getText().trim());
 
-		LibraryMemberDto member = new LibraryMemberDto(this.firstName.getText().trim(),
+		LibraryMemberDto member = new LibraryMemberDto("1",this.firstName.getText().trim(),
 									this.lastName.getText().trim(),
 									address,
 									this.phoneNo.getText().trim());
@@ -104,11 +104,11 @@ public class LibraryMemberController {
 
 				libraryMemberDto.setFirstName(this.firstName.getText());
 				libraryMemberDto.setLastName(this.lastName.getText());
-				libraryMemberDto.setPhoneNo(this.phoneNo.getText());
-				libraryMemberDto.getAddress().setState(this.state.getText());
-				libraryMemberDto.getAddress().setCity(this.city.getText());
-				libraryMemberDto.getAddress().setStreet(this.street.getText());
-				libraryMemberDto.getAddress().setZipCode(this.zipCode.getText());
+				libraryMemberDto.setPhoneNumber(this.phoneNo.getText());
+				libraryMemberDto.getAddressDto().setState(this.state.getText());
+				libraryMemberDto.getAddressDto().setCity(this.city.getText());
+				libraryMemberDto.getAddressDto().setStreet(this.street.getText());
+				libraryMemberDto.getAddressDto().setZipCode(this.zipCode.getText());
 
 				libraryMembeRepo.addMember(members);
 				parent.SearchMembers();

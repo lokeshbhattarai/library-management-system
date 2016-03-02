@@ -1,15 +1,21 @@
 package dataaccess.storage;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class BookDto {
+public class BookDto implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String title;
 	private String isbn;
 	private List<AuthorDto> authors;
 	private List<BookCopyDto> bookCopies;
 	private String number;
 	private String copyNumber;
+	private int daysAllowedForCheckout;
 
 	public BookDto(List<AuthorDto> authors, String title, String ISBN, String copyNumber){
 		this.title = title;
@@ -56,4 +62,13 @@ public class BookDto {
 	public void setBookCopies(List<BookCopyDto> bookCopies) {
 		this.bookCopies = bookCopies;
 	}
+
+	public int getDaysAllowedForCheckout() {
+		return daysAllowedForCheckout;
+	}
+
+	public void setDaysAllowedForCheckout(int daysAllowedForCheckout) {
+		this.daysAllowedForCheckout = daysAllowedForCheckout;
+	}
+	
 }
