@@ -64,7 +64,20 @@ public class ParentWindowController {
 		stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.DECORATED);
-        stage.setTitle("Add Library Member");
+        stage.setTitle("Add new Book");
+        stage.setScene(new Scene(root1));
+        stage.show();
+	}
+	public void showEditBookWondow() throws IOException{
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ui/EditBook.fxml"));
+
+		Parent root1 = null;
+		root1 = (Parent)fxmlLoader.load();
+
+		Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.DECORATED);
+        stage.setTitle("Search and Edit Book");
         stage.setScene(new Scene(root1));
         stage.show();
 	}

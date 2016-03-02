@@ -75,8 +75,44 @@ public class BookDao {
 		
 	}
 	
+	//in book records. log that following bookcopy is unavailable
 	public void logCheckoutOfCopy(String bookIsbn, UUID copyNumber){
-		//TODO
+		try {
+			List<BookDto> bookList = getBookList();
+			Iterator<BookDto> itrBook = bookList.iterator();
+			if(itrBook.hasNext()){
+				
+				while(itrBook.hasNext()){
+					BookDto book = itrBook.next();
+					if(book.getIsbn().equals(bookIsbn)){
+						List<BookCopyDto> bookCopies = book.getBookCopies();
+						Iterator<BookCopyDto> itrBookCopy = bookCopies.iterator();
+						
+						if(itrBookCopy.hasNext()){
+							while(itrBookCopy.hasNext()){
+								BookCopyDto bookCopy = itrBookCopy.next();
+								if(bookCopy.getCopyNumber().equals(copyNumber)){
+									bookCopy.setAvailable(false);
+									break;
+								}
+							}
+						}else{
+							System.out.println("NO book copy for the book in library");
+						}
+						break;
+						
+					}
+				}
+			}else{
+				System.out.println("NO books in library");
+			}
+			
+			addBook(bookList);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	public void addBook(List<BookDto> book){

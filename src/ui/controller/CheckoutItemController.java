@@ -156,25 +156,35 @@ public class CheckoutItemController {
 		}
 	}
 	
+	//mark the copy as unavailable, create a checkout entry and add it to checkout record of the member
+	//update book record , checkout record
 	public void checkOutBook(){
 		BookCopyDto selectedCopy = listBookCopy.getSelectionModel().getSelectedItem();
 		System.out.println("Selected copy UUID:"+selectedCopy.getCopyNumber());
 		
 		selectedCopy.setAvailable(false);
 		selectedCopy.setCheckedBy(libraryMemberDto); 
+		
 		CheckoutEntryDto checkoutEntryDto = new CheckoutEntryDto(selectedCopy);
 		
-		CheckoutRecordDao  checkoutRecordDao = new CheckoutRecordDao(checkoutRecordFile, memberId);
-		checkoutRecordDao.addCheckoutEntryForMember(checkoutEntryDto);
+		libraryMemberDto.getCheckoutRecordDto().getCheckoutEntryDtos().add(checkoutEntryDto);
+		
+		
+		CheckoutRecordDao  checkoutRecordDao = new CheckoutRecordDao(checkoutRecordFile);
+		checkoutRecordDao.addCheckoutEntryForMember(checkoutEntryDto,libraryMemberDto);
 		
 		new BookDao(bookFile).logCheckoutOfCopy(bookIsbn, selectedCopy.getCopyNumber());
 		
-		//mark the copy as unavailable, create a checkout entry and add it to checkout record of the member
-		//update book record , checkout record
+		new LibraryMemberDao(libraryMemberFile).updateCheckoutRecord(checkoutEntryDto,libraryMemberDto);
 		
+		showAlert("The book "+selectedCopy.getBookDto().getTitle() + " has been checked out to "
+				+ libraryMemberDto.getFirstName() + " "+ libraryMemberDto.getLastName()
+				+ " for "+ selectedCopy.getBookDto().getDaysAllowedForCheckout() + " days"
+				);
 		
-		
-		
+		listAuthor.getItems().clear();
+		listBookCopy.getItems().clear();
+		hideCheckoutFields();
 		
 	}
 	
