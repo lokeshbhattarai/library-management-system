@@ -3,7 +3,8 @@ package business;
 import java.util.ArrayList;
 import java.util.List;
 
-import dataaccess.storage.LoginUserDto;import dataaccess.storage.RoleDto;
+import business.LoginDao;
+import dataaccess.storage.LoginUserDto;
 
 public class LoginDao {
 	List<LoginUserDto> users;

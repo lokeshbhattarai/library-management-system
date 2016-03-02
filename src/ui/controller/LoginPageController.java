@@ -26,7 +26,6 @@ public class LoginPageController implements Initializable {
 	public LoginPageController(){
 		login = new LoginDao();
 	}
-	
 
 	public void login(){
 		String username = this.username.getText().trim();
