@@ -1,5 +1,6 @@
 package business;
 
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -17,6 +18,16 @@ public class LibraryMemberDao {
 
 	public void addMember(List<LibraryMemberDto> member){
 		reader.write(member);
+	}
+	
+	public boolean doesMemberExist(String memberId){
+		LibraryMemberDto member = getLibraryMember(memberId);
+		if(member == null){
+			return false;
+		}
+		else{
+			return true;
+		}
 	}
 
 	//check if the member can checkout book..if he already has some overdue book then he can not checkout another one

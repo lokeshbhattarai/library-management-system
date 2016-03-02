@@ -10,9 +10,9 @@ public class LoginDao {
 
 	public LoginDao(){
 		users = new ArrayList<LoginUserDto>();
-		users.add(new LoginUserDto("suraj", "suraj", RoleDto.Both));
-		users.add(new LoginUserDto("lokesh", "lokesh", RoleDto.Administrator));
-		users.add(new LoginUserDto("oriyon", "oriyon", RoleDto.Librarian));
+		users.add(new LoginUserDto("both", "both", RoleDto.Both));
+		users.add(new LoginUserDto("admin", "admin", RoleDto.Administrator));
+		users.add(new LoginUserDto("librn", "librn", RoleDto.Librarian));
 	}
 
 	public LoginUserDto validateUser(String username, String password){
