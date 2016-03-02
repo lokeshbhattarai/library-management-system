@@ -1,6 +1,7 @@
 package ui.controller;
 
 import business.LoginDao;
+import dataaccess.storage.LoginUserDto;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,14 +25,17 @@ public class LoginPageController {
 	}
 
 	public void login(){
-		//String username = this.username.getText().trim();
-		//String password = this.password.getText().trim();
+		String username = this.username.getText().trim();
+		String password = this.password.getText().trim();
+		LoginUserDto user = login.validateUser(username, password);
 
-		if(true/*this.validateUser(username, password)*/){
+		if(user != null){
 			try {
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ui/ParentWindow.fxml"));
 
 				Parent root1 = (Parent)fxmlLoader.load();
+				ParentWindowController parentController = fxmlLoader.<ParentWindowController>getController();
+				parentController.setLoginUser(user);
 
 		        Stage stage = new Stage();
 		        stage.setMaximized(true);
@@ -49,12 +53,5 @@ public class LoginPageController {
 		else{
 			this.status.setText("Invalid username or password !!!");
 		}
-	}
-
-	public boolean validateUser(String username, String password){
-		login.validateUser();
-
-		return false;
-		//System.out.println("login...");
 	}
 }

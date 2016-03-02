@@ -2,17 +2,41 @@ package ui.controller;
 
 import java.io.IOException;
 
+import dataaccess.storage.LoginUserDto;
+import dataaccess.storage.RoleDto;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class ParentWindowController {
+	@FXML MenuItem addMember;
+	@FXML MenuItem searchMember;
+
+	private LoginUserDto loggedInUser;
 
 	public ParentWindowController(){
 
+	}
+
+	public void setLoginUser(LoginUserDto user){
+		this.loggedInUser = user;
+		if(user.getRole() == RoleDto.Both){
+			addMember.setDisable(false);
+			searchMember.setDisable(false);
+		}
+		else if(user.getRole() == RoleDto.Administrator){
+			addMember.setDisable(false);
+			searchMember.setDisable(false);
+		}
+		else{
+			addMember.setDisable(true);
+			searchMember.setDisable(true);
+		}
 	}
 
 	public void showAddLibraryMemberWondow() throws IOException{
@@ -28,7 +52,7 @@ public class ParentWindowController {
         stage.setScene(new Scene(root1));
         stage.show();
 	}
-	
+
 	public void showAddBookWondow() throws IOException{
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ui/AddBook.fxml"));
 
