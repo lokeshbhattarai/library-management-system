@@ -4,11 +4,10 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class FineDto implements Serializable{
-
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -6965731774760341189L;
 	private CheckoutEntryDto checkoutEntryDto;
 	private double fineAmount;
 	private LocalDate datePaid;
