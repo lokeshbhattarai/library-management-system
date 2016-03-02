@@ -12,6 +12,7 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -45,15 +46,16 @@ public class EditBookController {
 	
 	@SuppressWarnings("unchecked")
 	public void searchBook() throws Exception{
-		book = new BookDao("C:\\Users\\Example\\Desktop\\Oriyon\\MppProject\\src\\docs\\book.txt");
+		
+		book = new BookDao("c:\\data\\book.txt");
 		books = book.getBookList();
 		for (BookDto authorDto2 : books) {
 			authordto = authorDto2.getAuthors();
 		}
 		
-		
 		ObservableList<BookDto> bookData = null;
 		bookData =  FXCollections.observableArrayList();
+		 FilteredList<BookDto> filteredData = new FilteredList<>(bookData, p -> true);
 		for (BookDto bookDto : books) {
 			bookData.add(bookDto);
 		}

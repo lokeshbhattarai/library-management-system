@@ -58,7 +58,7 @@ public class AddBookController {
 	List<BookDto> bookData=null;
 	
 	public AddBookController(){
-		book = new BookDao("C:\\Users\\Example\\Desktop\\Oriyon\\MppProject\\src\\docs\\book.txt");
+		book = new BookDao("c:\\data\\book.txt");
 		authordto = new ArrayList<AuthorDto>();
 		//readListBook(books);
 		Object data;
