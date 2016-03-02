@@ -1,8 +1,9 @@
 package dataaccess.storage;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class BookDto {
+public class BookDto implements Serializable{
 
 	private String title;
 	private String isbn;
@@ -55,5 +56,21 @@ public class BookDto {
 
 	public void setBookCopies(List<BookCopyDto> bookCopies) {
 		this.bookCopies = bookCopies;
+	}
+
+	public String getCopyNumber() {
+		return copyNumber;
+	}
+
+	public void setCopyNumber(String copyNumber) {
+		this.copyNumber = copyNumber;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
 	}
 }
