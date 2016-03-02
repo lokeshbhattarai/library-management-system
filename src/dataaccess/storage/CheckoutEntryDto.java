@@ -4,11 +4,10 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class CheckoutEntryDto implements Serializable{
-
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -4967017097435683077L;
 	private LocalDate checkoutDate;
 	private LocalDate dueDate;
 	private LocalDate returnedDate;
