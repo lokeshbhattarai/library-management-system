@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="453.0" prefWidth="708.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controller.AddBookController">
+   <children>
+     
+      <Button layoutX="190.0" layoutY="223.0" mnemonicParsing="false" onAction="#validate" text="Add" />
+      <Label layoutX="122.0" layoutY="27.0" prefHeight="36.0" prefWidth="320.0" styleClass="headertitle" text="Add Book" />
+      <Label layoutX="186.0" layoutY="102.0" text="Title" />
+      <Label layoutX="184.0" layoutY="143.0" text="ISBN" />
+      <Label layoutX="137.0" layoutY="177.0" text="Copy Number" />
+      <TextField fx:id="ISBN" layoutX="242.0" layoutY="139.0" />
+      <TextField fx:id="CopyNumber" layoutX="242.0" layoutY="173.0" />
+      <Button layoutX="298.0" layoutY="223.0" mnemonicParsing="false" text="Cancel" />
+      <TextField fx:id="title" layoutX="242.0" layoutY="98.0" />
+      <TableView fx:id="table" layoutX="99.0" layoutY="256.0" prefHeight="124.0" prefWidth="491.0">
+        <columns>
+          <TableColumn fx:id="c0" prefWidth="120.0" text="number" />
+          <TableColumn fx:id="c1" prefWidth="103.0" text="Title" />
+          <TableColumn fx:id="c2" prefWidth="119.0" text="ISBN" />
+          <TableColumn fx:id="c3" prefWidth="148.0" text="Copy Number" />
+        </columns>
+      </TableView>
+      <TextField fx:id="id" editable="false" layoutX="242.0" layoutY="63.0" visible="false" />
+   </children>
+</AnchorPane>
