@@ -6,20 +6,19 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="408.0" prefWidth="613.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="ui.controller.EditBookController">
+<AnchorPane prefHeight="408.0" prefWidth="613.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controller.EditBookController">
    <children>
       <Label layoutX="265.0" layoutY="44.0" text="Edit Book">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TableView fx:id="table" layoutX="18.0" layoutY="187.0" prefHeight="200.0" prefWidth="577.0">
+      <TableView fx:id="table" layoutX="18.0" layoutY="187.0" prefHeight="200.0" prefWidth="613.0">
         <columns>
           <TableColumn fx:id="t" prefWidth="75.0" text="Title" />
-          <TableColumn fx:id="i" prefWidth="140.0" text="ISBN" />
-            <TableColumn fx:id="n" prefWidth="119.0" text="Number of Copy" />
-            <TableColumn fx:id="a" prefWidth="177.0" text="Authors" />
+          <TableColumn fx:id="i" prefWidth="156.0" text="ISBN" />
+            <TableColumn fx:id="n" prefWidth="129.0" text="Number of Copy" />
+            <TableColumn fx:id="a" minWidth="0.0" prefWidth="151.0" text="Authors" />
         </columns>
       </TableView>
       <Label layoutX="54.0" layoutY="78.0" text="Title" />
