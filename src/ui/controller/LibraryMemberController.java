@@ -29,7 +29,7 @@ public class LibraryMemberController implements Initializable {
 	@FXML TextField zipCode;
 	@FXML Label title;
 
-	LibraryMemberDao libraryMembeRepo;
+	LibraryMemberDao memberManager;
 	List<LibraryMemberDto> members;
 
 	boolean isBeingEdited = false;
@@ -37,14 +37,14 @@ public class LibraryMemberController implements Initializable {
 	DisplayLibraryMemberController parent = null;
 
 	public LibraryMemberController() throws Exception{
-		libraryMembeRepo = new LibraryMemberDao("c:\\data\\LibraryMember.txt");
+		memberManager = new LibraryMemberDao("c:\\data\\LibraryMember.txt");
 
-		Object data = libraryMembeRepo.getMemberList();
+		Object data = memberManager.getMemberList();
 		if(data == null){
 			members = new ArrayList<LibraryMemberDto>();
 		}
 		else{
-			members = libraryMembeRepo.getMemberList();
+			members = memberManager.getMemberList();
 		}
 		//LibraryMemberDto object = (LibraryMemberDto)libraryMember.getMemberList();
 	}
@@ -86,6 +86,10 @@ public class LibraryMemberController implements Initializable {
 	}
 
 	public void add(){
+		if(memberManager.doesMemberExist(this.memberId.getText().trim())){
+			showMessage("Member Id [" + this.memberId.getText().trim() + "] already exists.\n\nPlease check." );
+			return;
+		}
 		AddressDto address = new AddressDto(this.street.getText().trim(),
 				this.city.getText().trim(),
 				this.state.getText().trim(),
@@ -98,15 +102,19 @@ public class LibraryMemberController implements Initializable {
 									this.phoneNo.getText().trim());
 
 		members.add(member);
-		libraryMembeRepo.addMember(members);
+		memberManager.addMember(members);
 
+		showMessage("New library member has been added successfully.");
+		this.clear();
+	}
+	
+	void showMessage(String message){
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Information Dialog");
 		alert.setHeaderText(null);
-		alert.setContentText("New library member has been added successfully.");
+		alert.setContentText(message);
 
 		alert.showAndWait();
-		this.clear();
 	}
 
 	public void edit() throws Exception{
@@ -122,18 +130,11 @@ public class LibraryMemberController implements Initializable {
 				libraryMemberDto.getAddress().setStreet(this.street.getText());
 				libraryMemberDto.getAddress().setZipCode(this.zipCode.getText());
 
-				libraryMembeRepo.addMember(members);
+				memberManager.addMember(members);
 				parent.SearchMembers();
 
 				Stage stage = (Stage)this.firstName.getScene().getWindow();
 			    stage.close();
-
-				/*Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Information Dialog");
-				alert.setHeaderText(null);
-				alert.setContentText("Library member has been edited successfully.");
-
-				alert.showAndWait();*/
 
 				break;
 			}
