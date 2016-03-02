@@ -145,6 +145,7 @@ public class DisplayLibraryMemberController {
 		addController.setEditMode(member, this);
 
         Stage stage = new Stage();
+        stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.DECORATED);
         stage.setTitle("Edit Library Member");

@@ -3,6 +3,10 @@ package dataaccess.storage;
 import java.io.Serializable;
 
 public class AddressDto implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6725701805573848217L;
 	String street;
 	String city;
 	String state;

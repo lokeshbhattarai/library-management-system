@@ -1,9 +1,13 @@
 package dataaccess.storage;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class BookCopyDto {
-
+public class BookCopyDto implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1506843096203118329L;
 	private UUID copyNumber;
 	private boolean isAvailable;
 	private LibraryMemberDto checkedBy;
