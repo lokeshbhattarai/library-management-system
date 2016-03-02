@@ -1,20 +1,16 @@
 package dataaccess.storage;
 
 import java.io.Serializable;
-import java.util.UUID;
 
-public class LibraryMemberDto /*extends PersonDto*/ implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private String memberId;
+public class LibraryMemberDto implements Serializable {
+	private static final long serialVersionUID = -8860640491534642878L;
 	private CheckoutRecordDto checkoutRecordDto;
-	private String firstName;
-	private String lastName;
-	private AddressDto addressDto;
-	private String phoneNumber;
-
+	String memberId;	
+	String firstName;
+	String lastName;
+	AddressDto address;
+	String phoneNo;
+	
 	public String getMemberId() {
 		return memberId;
 	}
@@ -23,17 +19,40 @@ public class LibraryMemberDto /*extends PersonDto*/ implements Serializable{
 		this.memberId = memberId;
 	}
 
-	
-	public LibraryMemberDto(String memberId, String firstName, String lastName, AddressDto address, String phoneNo) {
-		//super(firstName, lastName, address, phoneNo);
-		this.memberId = memberId;
-		this.firstName= firstName;
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
 		this.lastName = lastName;
-		this.addressDto = address;
-		this.phoneNumber = phoneNo;
+	}
+	public AddressDto getAddress() {
+		return address;
+	}
+	public void setAddress(AddressDto address) {
+		this.address = address;
+	}
+	public String getPhoneNo() {
+		return phoneNo;
+	}
+	public void setPhoneNo(String phoneNo) {
+		this.phoneNo = phoneNo;
 	}
 
-	/*@Override
+	public LibraryMemberDto(String memberId, String firstName, String lastName, AddressDto address, String phoneNo) {
+		this.memberId = memberId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.phoneNo = phoneNo;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		LibraryMemberDto member = (LibraryMemberDto)obj;
 		String ida = this.memberId.toString();
@@ -42,7 +61,7 @@ public class LibraryMemberDto /*extends PersonDto*/ implements Serializable{
 			return true;
 		else
 			return false;
-	}*/
+	}
 
 	public CheckoutRecordDto getCheckoutRecordDto() {
 		return checkoutRecordDto;
@@ -52,37 +71,7 @@ public class LibraryMemberDto /*extends PersonDto*/ implements Serializable{
 		this.checkoutRecordDto = checkoutRecordDto;
 	}
 
-	public String getFirstName() {
-		return firstName;
-	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public AddressDto getAddressDto() {
-		return addressDto;
-	}
-
-	public void setAddressDto(AddressDto addressDto) {
-		this.addressDto = addressDto;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
 	
 	
 }

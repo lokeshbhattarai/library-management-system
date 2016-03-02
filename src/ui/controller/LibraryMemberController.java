@@ -1,19 +1,25 @@
 package ui.controller;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.UUID;
 
 import business.LibraryMemberDao;
 import dataaccess.storage.AddressDto;
 import dataaccess.storage.LibraryMemberDto;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class LibraryMemberController {
+public class LibraryMemberController implements Initializable {
+	@FXML TextField memberId;
 	@FXML TextField firstName;
 	@FXML TextField lastName;
 	@FXML TextField phoneNo;
@@ -21,6 +27,7 @@ public class LibraryMemberController {
 	@FXML TextField city;
 	@FXML TextField street;
 	@FXML TextField zipCode;
+	@FXML Label title;
 
 	LibraryMemberDao libraryMembeRepo;
 	List<LibraryMemberDto> members;
@@ -45,15 +52,18 @@ public class LibraryMemberController {
 	public void setEditMode(LibraryMemberDto member, DisplayLibraryMemberController parent){
 		isBeingEdited = true;
 		this.parent = parent;
+		this.memberId.setDisable(true);
+		this.title.setText("Edit Library Member");
 
 		this.memberToEdit = member;
+		this.memberId.setText(member.getMemberId());
 		this.firstName.setText(member.getFirstName());
 		this.lastName.setText(member.getLastName());
-		this.phoneNo.setText(member.getPhoneNumber());
-		this.state.setText(member.getAddressDto().getState());
-		this.city.setText(member.getAddressDto().getCity());
-		this.street.setText(member.getAddressDto().getStreet());
-		this.zipCode.setText(member.getAddressDto().getZipCode());
+		this.phoneNo.setText(member.getPhoneNo());
+		this.state.setText(member.getAddress().getState());
+		this.city.setText(member.getAddress().getCity());
+		this.street.setText(member.getAddress().getStreet());
+		this.zipCode.setText(member.getAddress().getZipCode());
 	}
 
 	public void addLibraryMember(){
@@ -81,7 +91,8 @@ public class LibraryMemberController {
 				this.state.getText().trim(),
 				this.zipCode.getText().trim());
 
-		LibraryMemberDto member = new LibraryMemberDto("1",this.firstName.getText().trim(),
+		LibraryMemberDto member = new LibraryMemberDto(this.memberId.getText().trim(),
+									this.firstName.getText().trim(),
 									this.lastName.getText().trim(),
 									address,
 									this.phoneNo.getText().trim());
@@ -95,6 +106,7 @@ public class LibraryMemberController {
 		alert.setContentText("New library member has been added successfully.");
 
 		alert.showAndWait();
+		this.clear();
 	}
 
 	public void edit() throws Exception{
@@ -104,11 +116,11 @@ public class LibraryMemberController {
 
 				libraryMemberDto.setFirstName(this.firstName.getText());
 				libraryMemberDto.setLastName(this.lastName.getText());
-				libraryMemberDto.setPhoneNumber(this.phoneNo.getText());
-				libraryMemberDto.getAddressDto().setState(this.state.getText());
-				libraryMemberDto.getAddressDto().setCity(this.city.getText());
-				libraryMemberDto.getAddressDto().setStreet(this.street.getText());
-				libraryMemberDto.getAddressDto().setZipCode(this.zipCode.getText());
+				libraryMemberDto.setPhoneNo(this.phoneNo.getText());
+				libraryMemberDto.getAddress().setState(this.state.getText());
+				libraryMemberDto.getAddress().setCity(this.city.getText());
+				libraryMemberDto.getAddress().setStreet(this.street.getText());
+				libraryMemberDto.getAddress().setZipCode(this.zipCode.getText());
 
 				libraryMembeRepo.addMember(members);
 				parent.SearchMembers();
@@ -126,5 +138,34 @@ public class LibraryMemberController {
 				break;
 			}
 		}
+	}
+	
+	void clear(){
+		this.memberId.clear();
+		this.firstName.clear();
+		this.lastName.clear();
+		this.phoneNo.clear();
+		this.state.clear();
+		this.street.clear();
+		this.city.clear();
+		this.zipCode.clear();
+		
+		this.isBeingEdited = false;
+		this.memberToEdit = null;
+	}
+	
+	public void cancel(){
+		Stage stage = (Stage)this.firstName.getScene().getWindow();
+		stage.close();
+	}
+
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
+	    Platform.runLater(new Runnable() {
+	        @Override
+	        public void run() {
+	            memberId.requestFocus();
+	        }
+	    });
 	}
 }

@@ -1,18 +1,22 @@
 package ui.controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import business.LoginDao;
+import dataaccess.storage.LoginUserDto;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-public class LoginPageController {
+public class LoginPageController implements Initializable {
 	@FXML TextField username;
 	@FXML PasswordField password;
 	@FXML Label status;
@@ -22,16 +26,20 @@ public class LoginPageController {
 	public LoginPageController(){
 		login = new LoginDao();
 	}
+	
 
 	public void login(){
-		//String username = this.username.getText().trim();
-		//String password = this.password.getText().trim();
+		String username = this.username.getText().trim();
+		String password = this.password.getText().trim();
+		LoginUserDto user = login.validateUser(username, password);
 
-		if(true/*this.validateUser(username, password)*/){
+		if(user != null){
 			try {
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ui/ParentWindow.fxml"));
 
 				Parent root1 = (Parent)fxmlLoader.load();
+				ParentWindowController parentController = fxmlLoader.<ParentWindowController>getController();
+				parentController.setLoginUser(user);
 
 		        Stage stage = new Stage();
 		        stage.setMaximized(true);
@@ -51,10 +59,13 @@ public class LoginPageController {
 		}
 	}
 
-	public boolean validateUser(String username, String password){
-		login.validateUser();
-
-		return false;
-		//System.out.println("login...");
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
+	    Platform.runLater(new Runnable() {
+	        @Override
+	        public void run() {
+	            username.requestFocus();
+	        }
+	    });
 	}
 }

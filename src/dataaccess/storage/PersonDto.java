@@ -3,6 +3,10 @@ package dataaccess.storage;
 import java.io.Serializable;
 
 public class PersonDto implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5319045658801705059L;
 	String firstName;
 	String lastName;
 	AddressDto address;

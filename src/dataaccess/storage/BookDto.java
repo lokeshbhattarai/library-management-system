@@ -4,11 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 public class BookDto implements Serializable{
-
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -5767889313958934829L;
 	private String title;
 	private String isbn;
 	private List<AuthorDto> authors;
@@ -71,4 +70,19 @@ public class BookDto implements Serializable{
 		this.daysAllowedForCheckout = daysAllowedForCheckout;
 	}
 	
+	public String getCopyNumber() {
+		return copyNumber;
+	}
+
+	public void setCopyNumber(String copyNumber) {
+		this.copyNumber = copyNumber;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
 }

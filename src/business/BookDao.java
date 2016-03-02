@@ -88,6 +88,7 @@ public class BookDao {
 	public List<BookDto> getBookList() throws Exception{
 		return (List<BookDto>)reader.read();
 	}
+
 	public BookDto searchByTitle(String title){
 		List<BookDto> allbook= null;
 		BookDto bookdto=null;

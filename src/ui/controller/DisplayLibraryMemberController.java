@@ -62,7 +62,7 @@ public class DisplayLibraryMemberController {
                 ObservableValue<String>>() {
 					@Override
 					public ObservableValue<String> call(CellDataFeatures<LibraryMemberDto, String> data){
-						StringProperty p = new SimpleStringProperty(data.getValue().getAddressDto().getState());
+						StringProperty p = new SimpleStringProperty(data.getValue().getAddress().getState());
 						return p;
 					}
 					});
@@ -70,7 +70,7 @@ public class DisplayLibraryMemberController {
                 ObservableValue<String>>() {
 					@Override
 					public ObservableValue<String> call(CellDataFeatures<LibraryMemberDto, String> data){
-						StringProperty p = new SimpleStringProperty(data.getValue().getAddressDto().getCity());
+						StringProperty p = new SimpleStringProperty(data.getValue().getAddress().getCity());
 						return p;
 					}
 					});
@@ -78,7 +78,7 @@ public class DisplayLibraryMemberController {
                 ObservableValue<String>>() {
 					@Override
 					public ObservableValue<String> call(CellDataFeatures<LibraryMemberDto, String> data){
-						StringProperty p = new SimpleStringProperty(data.getValue().getAddressDto().getStreet());
+						StringProperty p = new SimpleStringProperty(data.getValue().getAddress().getStreet());
 						return p;
 					}
 					});
@@ -86,7 +86,7 @@ public class DisplayLibraryMemberController {
                 ObservableValue<String>>() {
 					@Override
 					public ObservableValue<String> call(CellDataFeatures<LibraryMemberDto, String> data){
-						StringProperty p = new SimpleStringProperty(data.getValue().getAddressDto().getZipCode());
+						StringProperty p = new SimpleStringProperty(data.getValue().getAddress().getZipCode());
 						return p;
 					}
 					});
@@ -145,6 +145,7 @@ public class DisplayLibraryMemberController {
 		addController.setEditMode(member, this);
 
         Stage stage = new Stage();
+        stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.DECORATED);
         stage.setTitle("Edit Library Member");

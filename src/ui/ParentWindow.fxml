@@ -13,8 +13,8 @@
           <menus>
             <Menu mnemonicParsing="false" text="Member">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#showAddLibraryMemberWondow" text="Add new" />
-                <MenuItem mnemonicParsing="false" onAction="#showDisplayLibraryMemberWondow" text="Search member" />
+                <MenuItem mnemonicParsing="false" onAction="#showAddLibraryMemberWondow" text="Add new" fx:id="addMember"/>
+                <MenuItem mnemonicParsing="false" onAction="#showDisplayLibraryMemberWondow" text="Search member" fx:id="searchMember"/>
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Book">
