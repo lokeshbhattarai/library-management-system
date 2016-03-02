@@ -53,11 +53,13 @@ public class AddBookController {
 	
 	private BookDao book;
 	private List<BookDto>books;
-	List<AuthorDto> authordto;
-	AddressDto address;
+	static List<AuthorDto> authordto;
+	static AddressDto address;
 	List<BookDto> bookData=null;
+	
 	public AddBookController(){
 		book = new BookDao("C:\\Users\\Example\\Desktop\\Oriyon\\MppProject\\src\\docs\\book.txt");
+		authordto = new ArrayList<AuthorDto>();
 		//readListBook(books);
 		Object data;
 		try {
@@ -93,6 +95,11 @@ public class AddBookController {
 	public void addBook(){
 		try{
 		//id.setText((books.size()+1)+"");
+			//System.out.println(address.getState()+" "+address.getCity());
+			for (AuthorDto authorDto2 : authordto) {
+				System.out.println("author list");
+				System.out.println(authorDto2.getFirstName()+" "+authorDto2.getLastName()+" "+authorDto2.getAddress());
+			}
 		BookDto booka = new BookDto(authordto, title.getText(), ISBN.getText(),CopyNumber.getText());
 		books.add(booka);
 		book.addBook(books);
@@ -111,28 +118,23 @@ public class AddBookController {
 			alert.showAndWait();
 		}
 		readListBook();
-		//for (int i=0;i<3;i++) {
-			System.out.println(authordto.get(0).getFirstName());
-		//}
+		
 	}
 	public void addAuthor(){
 		address = new AddressDto(this.street.getText().trim(),
 				this.city.getText().trim(),
 				this.state.getText().trim(),
 				this.zipcode.getText().trim());
-		authordto = new ArrayList<AuthorDto>();
-		
 		authordto.add(new AuthorDto(firstname.getText(), lastname.getText(), shortBio.getText(), address, phone.getText()));
-			
+		
+		// add author info close	
 		Stage stage = (Stage) save.getScene().getWindow();
 	    stage.close();	
 	}
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void readListBook(){
-
 		ObservableList bookData = null;
 		try {
-
 			 books = book.getBookList();
 			 System.out.println(books.size());
 			 bookData = FXCollections.observableArrayList(books);
@@ -145,7 +147,7 @@ public class AddBookController {
 		c1.setCellValueFactory(new PropertyValueFactory<BookDto, String>("title"));
 		c2.setCellValueFactory(new PropertyValueFactory<BookDto, String>("isbn"));
 		c3.setCellValueFactory(new PropertyValueFactory<BookDto, String>("copyNumber"));
-		c4.setCellValueFactory(new PropertyValueFactory<BookDto, String>("authors"));
+		c4.setCellValueFactory(new PropertyValueFactory<AuthorDto, String>("authors"));
 			//for (BookDto o : books) {
 				//System.out.println(o.);
 			//}

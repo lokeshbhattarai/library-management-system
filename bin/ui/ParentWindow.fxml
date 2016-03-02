@@ -20,7 +20,7 @@
             <Menu mnemonicParsing="false" text="Book">
               <items>
                 <MenuItem mnemonicParsing="false" text="Add new" onAction="#showAddBookWondow"/>
-                <MenuItem mnemonicParsing="false" text="Search book" />
+                <MenuItem mnemonicParsing="false" text="Search book" onAction="#showEditBookWondow" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Checkout">
