@@ -169,11 +169,22 @@ public class CheckoutItemController {
 		
 		libraryMemberDto.getCheckoutRecordDto().getCheckoutEntryDtos().add(checkoutEntryDto);
 		
+		
 		CheckoutRecordDao  checkoutRecordDao = new CheckoutRecordDao(checkoutRecordFile);
 		checkoutRecordDao.addCheckoutEntryForMember(checkoutEntryDto,libraryMemberDto);
 		
 		new BookDao(bookFile).logCheckoutOfCopy(bookIsbn, selectedCopy.getCopyNumber());
 		
+		new LibraryMemberDao(libraryMemberFile).updateCheckoutRecord(checkoutEntryDto,libraryMemberDto);
+		
+		showAlert("The book "+selectedCopy.getBookDto().getTitle() + " has been checked out to "
+				+ libraryMemberDto.getFirstName() + " "+ libraryMemberDto.getLastName()
+				+ " for "+ selectedCopy.getBookDto().getDaysAllowedForCheckout() + " days"
+				);
+		
+		listAuthor.getItems().clear();
+		listBookCopy.getItems().clear();
+		hideCheckoutFields();
 		
 	}
 	

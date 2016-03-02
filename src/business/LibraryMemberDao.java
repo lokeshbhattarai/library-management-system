@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import dataaccess.DataReader;
+import dataaccess.storage.CheckoutEntryDto;
 import dataaccess.storage.LibraryMemberDto;
 
 public class LibraryMemberDao {
@@ -21,6 +22,27 @@ public class LibraryMemberDao {
 	//check if the member can checkout book..if he already has some overdue book then he can not checkout another one
 	public boolean canUserCheckoutBook(String memberId){
 		return true;
+	}
+	
+	public void updateCheckoutRecord(CheckoutEntryDto checkoutEntryDto, LibraryMemberDto libraryMember){
+		
+		try {
+			List<LibraryMemberDto> memberList = getMemberList();
+			Iterator<LibraryMemberDto> itrMembers = memberList.iterator();
+			if(itrMembers.hasNext()){
+				while(itrMembers.hasNext()){
+					LibraryMemberDto member = itrMembers.next();
+					if(member.equals(libraryMember)){
+						member.getCheckoutRecordDto().getCheckoutEntryDtos().add(checkoutEntryDto);
+					}
+				}
+			}
+			
+			addMember(memberList);
+		} catch (Exception e) {
+		}
+		
+		
 	}
 	
 	public boolean doesUserExist(String memberId){

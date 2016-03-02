@@ -107,6 +107,8 @@ public class BookDao {
 				System.out.println("NO books in library");
 			}
 			
+			addBook(bookList);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
