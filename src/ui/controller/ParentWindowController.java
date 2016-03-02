@@ -46,6 +46,7 @@ public class ParentWindowController {
 		root1 = (Parent)fxmlLoader.load();
 
 		Stage stage = new Stage();
+		stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.DECORATED);
         stage.setTitle("Add Library Member");
@@ -60,6 +61,7 @@ public class ParentWindowController {
 		root1 = (Parent)fxmlLoader.load();
 
 		Stage stage = new Stage();
+		stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.DECORATED);
         stage.setTitle("Add Library Member");
@@ -74,9 +76,10 @@ public class ParentWindowController {
 		root1 = (Parent)fxmlLoader.load();
 
 		Stage stage = new Stage();
+		stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.DECORATED);
-        stage.setTitle("Add Library Member");
+        stage.setTitle("Search Library Member");
         stage.setScene(new Scene(root1));
         stage.show();
 	}
@@ -88,6 +91,7 @@ public class ParentWindowController {
 		root1 = (Parent)fxmlLoader.load();
 
 		Stage stage = new Stage();
+		stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.DECORATED);
         stage.setTitle("Checkout Book");

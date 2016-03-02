@@ -1,19 +1,22 @@
 package ui.controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import business.LoginDao;
 import dataaccess.storage.LoginUserDto;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-public class LoginPageController {
+public class LoginPageController implements Initializable {
 	@FXML TextField username;
 	@FXML PasswordField password;
 	@FXML Label status;
@@ -23,6 +26,7 @@ public class LoginPageController {
 	public LoginPageController(){
 		login = new LoginDao();
 	}
+	
 
 	public void login(){
 		String username = this.username.getText().trim();
@@ -53,5 +57,15 @@ public class LoginPageController {
 		else{
 			this.status.setText("Invalid username or password !!!");
 		}
+	}
+
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
+	    Platform.runLater(new Runnable() {
+	        @Override
+	        public void run() {
+	            username.requestFocus();
+	        }
+	    });
 	}
 }

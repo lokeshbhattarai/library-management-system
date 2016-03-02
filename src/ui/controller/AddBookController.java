@@ -166,5 +166,4 @@ public class AddBookController {
         stage.setScene(new Scene(root1));
         stage.show();
 	}
-
 }
