@@ -1,6 +1,8 @@
 package dataaccess.storage;
 
-public class AuthorDto {
+import java.io.Serializable;
+
+public class AuthorDto implements Serializable{
 	private String firstName;
 	private String lastName;
 	private String shortBio;

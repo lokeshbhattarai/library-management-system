@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
@@ -17,14 +18,16 @@
       <TextField fx:id="CopyNumber" layoutX="242.0" layoutY="173.0" />
       <Button layoutX="298.0" layoutY="223.0" mnemonicParsing="false" text="Cancel" />
       <TextField fx:id="title" layoutX="242.0" layoutY="98.0" />
-      <TableView fx:id="table" layoutX="99.0" layoutY="256.0" prefHeight="124.0" prefWidth="491.0">
+      <TableView fx:id="table" layoutX="8.0" layoutY="271.0" prefHeight="124.0" prefWidth="693.0">
         <columns>
-          <TableColumn fx:id="c0" prefWidth="120.0" text="number" />
-          <TableColumn fx:id="c1" prefWidth="103.0" text="Title" />
-          <TableColumn fx:id="c2" prefWidth="119.0" text="ISBN" />
-          <TableColumn fx:id="c3" prefWidth="148.0" text="Copy Number" />
+          <TableColumn fx:id="c0" prefWidth="97.0" text="number" />
+          <TableColumn fx:id="c1" prefWidth="82.0" text="Title" />
+          <TableColumn fx:id="c2" prefWidth="108.0" text="ISBN" />
+          <TableColumn fx:id="c3" prefWidth="117.0" text="Copy Number" />
+            <TableColumn fx:id="c4" prefWidth="117.0" text="Author" />
         </columns>
       </TableView>
       <TextField fx:id="id" editable="false" layoutX="242.0" layoutY="63.0" visible="false" />
+      <Button layoutX="465.0" layoutY="98.0" mnemonicParsing="false" onAction="#showAddBookAuthorWondow" text="Add Author Information" />
    </children>
 </AnchorPane>
