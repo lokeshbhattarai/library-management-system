@@ -7,6 +7,7 @@ import java.util.UUID;
 import business.BookDao;
 import business.CheckoutRecordDao;
 import business.LibraryMemberDao;
+import dataaccess.FilePath;
 import dataaccess.storage.AuthorDto;
 import dataaccess.storage.BookCopyDto;
 import dataaccess.storage.CheckoutEntryDto;
@@ -41,9 +42,9 @@ public class CheckoutItemController {
 	private String bookIsbn;
 	
 	 public CheckoutItemController(){
-		 this.bookFile = "";
-		 this.libraryMemberFile = "";
-		 this.checkoutRecordFile = "";
+		 this.bookFile = FilePath.BOOK_RECORD;
+		 this.libraryMemberFile = FilePath.MEMBER_RECORD;
+		 this.checkoutRecordFile = FilePath.CHECKOUT_RECORD;
 	 }
 
 	public void checkAvailabiltyForCheckout(){

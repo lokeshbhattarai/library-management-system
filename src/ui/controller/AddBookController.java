@@ -6,10 +6,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dataaccess.FilePath;
 import dataaccess.storage.AddressDto;
 import dataaccess.storage.AuthorDto;
 import dataaccess.storage.BookDto;
+import dataaccess.storage.LibraryMemberDto;
 import business.BookDao;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,10 +28,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
 
 public class AddBookController {
 	@FXML Button btnAuthor;
@@ -58,7 +65,7 @@ public class AddBookController {
 	List<BookDto> bookData=null;
 	
 	public AddBookController(){
-		book = new BookDao("C:\\Users\\Example\\Desktop\\Oriyon\\MppProject\\src\\docs\\book.txt");
+		book = new BookDao(FilePath.BOOK_RECORD);
 		authordto = new ArrayList<AuthorDto>();
 		//readListBook(books);
 		Object data;
@@ -148,6 +155,19 @@ public class AddBookController {
 		c2.setCellValueFactory(new PropertyValueFactory<BookDto, String>("isbn"));
 		c3.setCellValueFactory(new PropertyValueFactory<BookDto, String>("copyNumber"));
 		c4.setCellValueFactory(new PropertyValueFactory<AuthorDto, String>("authors"));
+		c4.setCellValueFactory(new Callback<CellDataFeatures<BookDto, String>,
+                ObservableValue<String>>() {
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<BookDto, String> data){
+						String authors =  data.getValue().getAuthors().size()+"";
+						
+						for (AuthorDto author : data.getValue().getAuthors()) {
+							//authors += author.getFirstName()+" "+author.getLastName()+"\n";
+						}
+						StringProperty p = new SimpleStringProperty(authors);
+						return p;
+					}
+					});
 			//for (BookDto o : books) {
 				//System.out.println(o.);
 			//}
@@ -159,6 +179,10 @@ public class AddBookController {
 		System.out.println("no error");
 		Parent root1 = null;
 		root1 = fxmlLoader.load();
+		
+		AddAuthorInfoController authorController = fxmlLoader.<AddAuthorInfoController>getController();
+		authorController.setAuthor(authordto);
+		
 		System.out.println(root1);
 		Stage stage = new Stage();
 		//Scene scene = new Scene(root1);

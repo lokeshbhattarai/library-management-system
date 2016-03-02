@@ -22,6 +22,9 @@ public class BookDao {
 		List<BookDto> bookList;
 		try {
 			bookList = (List<BookDto>)reader.read();
+			if(bookList == null){
+				return false;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;

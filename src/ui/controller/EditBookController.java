@@ -3,6 +3,7 @@ package ui.controller;
 import java.util.List;
 
 import business.BookDao;
+import dataaccess.FilePath;
 import dataaccess.storage.AddressDto;
 import dataaccess.storage.AuthorDto;
 import dataaccess.storage.BookDto;
@@ -45,8 +46,14 @@ public class EditBookController {
 	
 	@SuppressWarnings("unchecked")
 	public void searchBook() throws Exception{
-		book = new BookDao("C:\\Users\\Example\\Desktop\\Oriyon\\MppProject\\src\\docs\\book.txt");
+		book = new BookDao(FilePath.BOOK_RECORD);
 		books = book.getBookList();
+		for (BookDto book : books) {
+			for (AuthorDto author : book.getAuthors()) {
+				System.out.println("book: " + book.getTitle()+", author: "+ author.getFirstName());
+			}
+		}
+		
 		for (BookDto authorDto2 : books) {
 			authordto = authorDto2.getAuthors();
 		}
