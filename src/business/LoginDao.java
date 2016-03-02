@@ -5,6 +5,7 @@ import java.util.List;
 
 import business.LoginDao;
 import dataaccess.storage.LoginUserDto;
+import dataaccess.storage.RoleDto;
 
 public class LoginDao {
 	List<LoginUserDto> users;

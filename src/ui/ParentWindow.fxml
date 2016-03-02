@@ -19,13 +19,13 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Book">
               <items>
-                <MenuItem mnemonicParsing="false" text="Add new" onAction="#showAddBookWondow"/>
-                <MenuItem mnemonicParsing="false" text="Search book" onAction="#showEditBookWondow" />
+                <MenuItem mnemonicParsing="false" text="Add new" onAction="#showAddBookWondow" fx:id="addBook"/>
+                <MenuItem mnemonicParsing="false" text="Search book" onAction="#showEditBookWondow" fx:id="searchBook"/>
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Checkout">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#showCheckoutRecordWindow" text="Issue book" />
+                <MenuItem mnemonicParsing="false" onAction="#showCheckoutRecordWindow" text="Issue book" fx:id="checkoutBook"/>
               </items>
             </Menu>
           </menus>

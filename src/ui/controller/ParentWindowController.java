@@ -16,6 +16,9 @@ import javafx.stage.StageStyle;
 public class ParentWindowController {
 	@FXML MenuItem addMember;
 	@FXML MenuItem searchMember;
+	@FXML MenuItem addBook;
+	@FXML MenuItem searchBook;
+	@FXML MenuItem checkoutBook;
 
 	private LoginUserDto loggedInUser;
 
@@ -26,17 +29,22 @@ public class ParentWindowController {
 	public void setLoginUser(LoginUserDto user){
 		this.loggedInUser = user;
 		if(user.getRole() == RoleDto.Both){
-			addMember.setDisable(false);
-			searchMember.setDisable(false);
+			this.applyAuthentication(true, true, true, true, true);
 		}
 		else if(user.getRole() == RoleDto.Administrator){
-			addMember.setDisable(false);
-			searchMember.setDisable(false);
+			this.applyAuthentication(true, true, true, true, false);
 		}
 		else{
-			addMember.setDisable(true);
-			searchMember.setDisable(true);
+			this.applyAuthentication(false, false, false, false, true);
 		}
+	}
+
+	void applyAuthentication(boolean addMember, boolean searchMember, boolean addBook, boolean searchBook, boolean checkoutRecord){
+		this.addMember.setDisable(!addMember);
+		this.searchMember.setDisable(!searchBook);
+		this.addBook.setDisable(!addBook);
+		this.searchBook.setDisable(!searchBook);
+		this.checkoutBook.setDisable(!checkoutRecord);
 	}
 
 	public void showAddLibraryMemberWondow() throws IOException{

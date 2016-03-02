@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import java.util.UUID;
 
 import business.LibraryMemberDao;
+import dataaccess.FilePath;
 import dataaccess.storage.AddressDto;
 import dataaccess.storage.LibraryMemberDto;
 import javafx.application.Platform;
@@ -37,7 +38,7 @@ public class LibraryMemberController implements Initializable {
 	DisplayLibraryMemberController parent = null;
 
 	public LibraryMemberController() throws Exception{
-		memberManager = new LibraryMemberDao("c:\\data\\LibraryMember.txt");
+		memberManager = new LibraryMemberDao(FilePath.MEMBER_RECORD);
 
 		Object data = memberManager.getMemberList();
 		if(data == null){
