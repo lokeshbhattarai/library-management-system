@@ -3,6 +3,10 @@ package dataaccess.storage;
 import java.io.Serializable;
 
 public class AuthorDto implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1338168203016142582L;
 	private String firstName;
 	private String lastName;
 	private String shortBio;

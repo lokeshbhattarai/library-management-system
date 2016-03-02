@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class LibraryMemberDto implements Serializable {
 	private static final long serialVersionUID = -8860640491534642878L;
-	
+	private CheckoutRecordDto checkoutRecordDto;
 	String memberId;	
 	String firstName;
 	String lastName;
@@ -62,4 +62,16 @@ public class LibraryMemberDto implements Serializable {
 		else
 			return false;
 	}
+
+	public CheckoutRecordDto getCheckoutRecordDto() {
+		return checkoutRecordDto;
+	}
+
+	public void setCheckoutRecordDto(CheckoutRecordDto checkoutRecordDto) {
+		this.checkoutRecordDto = checkoutRecordDto;
+	}
+
+
+	
+	
 }

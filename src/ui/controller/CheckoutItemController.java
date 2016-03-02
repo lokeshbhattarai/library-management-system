@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.UUID;
 
 import business.BookDao;
+import business.CheckoutRecordDao;
 import business.LibraryMemberDao;
 import dataaccess.storage.AuthorDto;
 import dataaccess.storage.BookCopyDto;
+import dataaccess.storage.CheckoutEntryDto;
+import dataaccess.storage.LibraryMemberDto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,7 +36,10 @@ public class CheckoutItemController {
 	String bookFile;
 	String libraryMemberFile;
 	String checkoutRecordFile;
-
+	private String memberId;
+	private LibraryMemberDto libraryMemberDto;
+	private String bookIsbn;
+	
 	 public CheckoutItemController(){
 		 this.bookFile = "";
 		 this.libraryMemberFile = "";
@@ -42,8 +48,8 @@ public class CheckoutItemController {
 
 	public void checkAvailabiltyForCheckout(){
 
-		String memberId = textFieldMemberId.getText();
-		String bookIsbn = textFieldBookIsbn.getText();
+		memberId = textFieldMemberId.getText();
+		bookIsbn = textFieldBookIsbn.getText();
 
 		System.out.println("check availabilty for checkout:memberId="+memberId);
 
@@ -57,16 +63,34 @@ public class CheckoutItemController {
 			 *
 			 * */
 
-			showCheckoutFields();
+			
+			
+			
 
 			BookDao bookDao = new BookDao(bookFile);
 			LibraryMemberDao memberDao = new LibraryMemberDao(libraryMemberFile);
-			if(bookDao.isBookAvailableInLibrary()){
-				if(memberDao.canUserCheckoutBook()){
+			
+			if(!memberDao.doesUserExist(memberId)){
+				showAlert("The requested member was not found in database.");
+				return;
+			}
+			
+			libraryMemberDto = memberDao.getLibraryMember(memberId);
 
-					ObservableList<BookCopyDto> copiesAvailable = getInitialTableData();//TODO bookDao.getListOfCopiesAvailable();
+			if(bookDao.isBookAvailableInLibrary(bookIsbn)){
+				if(memberDao.canUserCheckoutBook(memberId)){
+
+					showCheckoutFields();
+					
+					ObservableList<BookCopyDto> copiesAvailable = null;
+					
+					try {
+						copiesAvailable = FXCollections.observableList(bookDao.getListOfCopiesAvailable(bookIsbn));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					if(copiesAvailable!=null && copiesAvailable.size()>0){
-						//TODO show list of copies available
+						// show list of copies available
 						listBookCopy.setItems(copiesAvailable);
 
 						listBookCopy.setCellFactory(new Callback<ListView<BookCopyDto>, ListCell<BookCopyDto>>(){
@@ -129,9 +153,31 @@ public class CheckoutItemController {
 				showAlert("Library does not have the book.");
 			}
 
-
 		}
 	}
+	
+	public void checkOutBook(){
+		BookCopyDto selectedCopy = listBookCopy.getSelectionModel().getSelectedItem();
+		System.out.println("Selected copy UUID:"+selectedCopy.getCopyNumber());
+		
+		selectedCopy.setAvailable(false);
+		selectedCopy.setCheckedBy(libraryMemberDto); 
+		CheckoutEntryDto checkoutEntryDto = new CheckoutEntryDto(selectedCopy);
+		
+		CheckoutRecordDao  checkoutRecordDao = new CheckoutRecordDao(checkoutRecordFile, memberId);
+		checkoutRecordDao.addCheckoutEntryForMember(checkoutEntryDto);
+		
+		new BookDao(bookFile).logCheckoutOfCopy(bookIsbn, selectedCopy.getCopyNumber());
+		
+		//mark the copy as unavailable, create a checkout entry and add it to checkout record of the member
+		//update book record , checkout record
+		
+		
+		
+		
+		
+	}
+	
 	 private ObservableList getInitialTableData() {
 
 	        List list = new ArrayList();
@@ -178,6 +224,7 @@ public class CheckoutItemController {
 		System.out.println("clear the fields");
 		textFieldMemberId.clear();
 		textFieldBookIsbn.clear();
+		hideCheckoutFields();
 	}
 
 	public void showAlert(String message){
