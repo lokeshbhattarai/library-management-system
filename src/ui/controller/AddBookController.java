@@ -5,10 +5,12 @@ package ui.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import dataaccess.FilePath;
 import dataaccess.storage.AddressDto;
 import dataaccess.storage.AuthorDto;
+import dataaccess.storage.BookCopyDto;
 import dataaccess.storage.BookDto;
 import dataaccess.storage.LibraryMemberDto;
 import business.BookDao;
@@ -108,6 +110,11 @@ public class AddBookController {
 				System.out.println(authorDto2.getFirstName()+" "+authorDto2.getLastName()+" "+authorDto2.getAddress());
 			}
 		BookDto booka = new BookDto(authordto, title.getText(), ISBN.getText(),CopyNumber.getText());
+		List<BookCopyDto> copies = new ArrayList<BookCopyDto>();
+		for (int i = 0; i < Integer.parseInt(CopyNumber.getText()); i++) {
+			copies.add(new BookCopyDto(UUID.randomUUID(), booka));
+		}
+		booka.setBookCopies(copies);
 		books.add(booka);
 		book.addBook(books);
 		Alert alert = new Alert(AlertType.INFORMATION);

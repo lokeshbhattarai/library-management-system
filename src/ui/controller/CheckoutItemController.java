@@ -11,6 +11,7 @@ import dataaccess.FilePath;
 import dataaccess.storage.AuthorDto;
 import dataaccess.storage.BookCopyDto;
 import dataaccess.storage.CheckoutEntryDto;
+import dataaccess.storage.CheckoutRecordDto;
 import dataaccess.storage.LibraryMemberDto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -168,8 +169,26 @@ public class CheckoutItemController {
 		
 		CheckoutEntryDto checkoutEntryDto = new CheckoutEntryDto(selectedCopy);
 		
-		libraryMemberDto.getCheckoutRecordDto().getCheckoutEntryDtos().add(checkoutEntryDto);
 		
+		
+		if(libraryMemberDto.getCheckoutRecordDto()!=null){
+			if(libraryMemberDto.getCheckoutRecordDto().getCheckoutEntryDtos()!=null){
+				libraryMemberDto.getCheckoutRecordDto().getCheckoutEntryDtos().add(checkoutEntryDto);
+			}else{
+				List<CheckoutEntryDto> checkoutEntryList = new ArrayList<CheckoutEntryDto>();
+				checkoutEntryList.add(checkoutEntryDto);
+				
+				libraryMemberDto.getCheckoutRecordDto().setCheckoutEntryDtos(checkoutEntryList);
+			}
+		}else{
+			List<CheckoutEntryDto> checkoutEntryList = new ArrayList<CheckoutEntryDto>();
+			checkoutEntryList.add(checkoutEntryDto);
+			
+			CheckoutRecordDto checkoutRecordDto = new CheckoutRecordDto(libraryMemberDto);
+			checkoutRecordDto.setCheckoutEntryDtos(checkoutEntryList);
+			
+			libraryMemberDto.setCheckoutRecordDto(checkoutRecordDto);
+		}
 		
 		CheckoutRecordDao  checkoutRecordDao = new CheckoutRecordDao(checkoutRecordFile);
 		checkoutRecordDao.addCheckoutEntryForMember(checkoutEntryDto,libraryMemberDto);
