@@ -21,6 +21,7 @@ public class CheckoutRecordDao {
 	public void addCheckoutEntryForMember(CheckoutEntryDto checkoutEntryDto, LibraryMemberDto libraryMember){
 		
 		List<CheckoutRecordDto> checkoutRecordList = getAllCheckoutRecords();
+		
 		Iterator<CheckoutRecordDto> itrCheckoutRecord = checkoutRecordList.iterator();
 		
 		if(itrCheckoutRecord.hasNext()){
