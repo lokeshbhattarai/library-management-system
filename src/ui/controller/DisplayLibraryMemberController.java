@@ -28,6 +28,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import business.LibraryMemberDao;
+import dataaccess.FilePath;
 import dataaccess.storage.LibraryMemberDto;
 
 public class DisplayLibraryMemberController {
@@ -44,7 +45,7 @@ public class DisplayLibraryMemberController {
 
 	@SuppressWarnings("unchecked")
 	public DisplayLibraryMemberController() throws Exception{
-		libraryMember = new LibraryMemberDao("c:\\data\\LibraryMember.txt");
+		libraryMember = new LibraryMemberDao(FilePath.MEMBER_RECORD);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
