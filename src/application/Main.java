@@ -21,6 +21,7 @@ public class Main extends Application {
 
 			//primaryStage.setMaximized(true);
 			primaryStage.setResizable(false);
+			primaryStage.setTitle("User Login");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {
