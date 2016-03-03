@@ -66,7 +66,7 @@ public class AddBookController {
 	static List<AuthorDto> authordto;
 	static AddressDto address;
 	List<BookDto> bookData=null;
-	
+
 
 	public AddBookController(){
 		book = new BookDao(FilePath.BOOK_RECORD);
@@ -136,11 +136,11 @@ public class AddBookController {
 		readListBook();
 
 	}
-	
+
 	public void closeAddBookWindow(){
 		((Stage)buttonCancelWindow.getScene().getWindow()).close();;
 	}
-	
+
 	public void addAuthor(){
 		address = new AddressDto(this.street.getText().trim(),
 				this.city.getText().trim(),
@@ -202,7 +202,7 @@ public class AddBookController {
 		//Scene scene = new Scene(root1);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.DECORATED);
-        stage.setTitle("Add Library Member");
+        stage.setTitle("Add Author Information");
         stage.setScene(new Scene(root1));
         stage.show();
 	}
