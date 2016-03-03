@@ -16,11 +16,12 @@ public class BookDto implements Serializable{
 	private String copyNumber;
 	private int daysAllowedForCheckout;
 
-	public BookDto(List<AuthorDto> authors, String title, String ISBN, String copyNumber){
+	public BookDto(List<AuthorDto> authors, String title, String ISBN, String copyNumber,int daysAllowedForCheckout){
 		this.title = title;
 		this.isbn = ISBN;
 		this.authors = authors;
 		this.copyNumber = copyNumber;
+		this.daysAllowedForCheckout = daysAllowedForCheckout;
 	}
 
 	public BookDto(String title, String isbn, List<AuthorDto> authors, List<BookCopyDto> bookCopies){
