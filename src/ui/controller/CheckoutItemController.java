@@ -120,6 +120,8 @@ public class CheckoutItemController {
 
 
 						BookDto book = bookDao.getBook(bookIsbn);
+						labelBookName.setText(book.getTitle());
+						
 						if(book!=null){
 							List<AuthorDto> authorList = book.getAuthors();
 							if(authorList!=null){
@@ -149,6 +151,7 @@ public class CheckoutItemController {
 
 							}else{
 								listAuthor.getItems().clear();
+								System.out.println("No authors found for this book");
 							}
 						}
 						
