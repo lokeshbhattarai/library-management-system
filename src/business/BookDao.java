@@ -91,6 +91,7 @@ public class BookDao {
 				
 				if(bookCopyDto.isAvailable()){
 					bookCopyList.add(bookCopyDto);
+//					System.out.println("copy available::"+bookCopyDto.getCopyNumber());
 				}
 				
 			}

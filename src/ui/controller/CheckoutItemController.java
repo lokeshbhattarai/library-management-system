@@ -90,6 +90,7 @@ public class CheckoutItemController {
 					
 					try {
 						copiesAvailable = FXCollections.observableList(bookDao.getListOfCopiesAvailable(bookIsbn));
+						System.out.println("total copies available::"+copiesAvailable.size());
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -109,6 +110,7 @@ public class CheckoutItemController {
 					                        super.updateItem(t, bln);
 					                        if (t != null) {
 					                            setText(t.getCopyNumber()+"");
+					                            System.out.println("setting book copy ::"+t.getCopyNumber()+"");
 					                        }
 					                    }
 
@@ -124,6 +126,7 @@ public class CheckoutItemController {
 						
 						if(book!=null){
 							List<AuthorDto> authorList = book.getAuthors();
+							System.out.println("total authors::"+authorList.size());
 							if(authorList!=null){
 								ObservableList<AuthorDto> authors = FXCollections.observableList(authorList);
 								listAuthor.setItems(authors);
@@ -252,8 +255,8 @@ public class CheckoutItemController {
 		 labelAuthor.setVisible(false);
 		 labelCopies.setVisible(false);
 		 buttonCheckout.setVisible(false);
-		 listAuthor.setVisible(true);
-		 listBookCopy.setVisible(true);
+		 listAuthor.setVisible(false);
+		 listBookCopy.setVisible(false);
 	}
 
 	public void showCheckoutFields(){
@@ -262,8 +265,8 @@ public class CheckoutItemController {
 		 labelAuthor.setVisible(true);
 		 labelCopies.setVisible(true);
 		 buttonCheckout.setVisible(true);
-		 listAuthor.setVisible(false);
-		 listBookCopy.setVisible(false);
+		 listAuthor.setVisible(true);
+		 listBookCopy.setVisible(true);
 	}
 
 	public void resetInputFields(){
