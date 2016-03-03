@@ -122,6 +122,46 @@ public class EditBookController {
 					});
 		
 		//this.table.setItems(bookData);
-		
+		Callback<TableColumn<BookDto, String>, TableCell<BookDto, String>> cellFactory = //
+                new Callback<TableColumn<BookDto, String>, TableCell<BookDto, String>>()
+                {
+                    @Override
+                    public TableCell call( final TableColumn<BookDto, String> param )
+                    {
+                        final TableCell<BookDto, String> cell = new TableCell<BookDto, String>()
+                        {
+
+                            final Button btn = new Button( "Edit" );
+
+                            @Override
+                            public void updateItem( String item, boolean empty )
+                            {
+                                super.updateItem( item, empty );
+                                if ( empty )
+                                {
+                                    setGraphic( null );
+                                    setText( null );
+                                }
+                                else
+                                {
+                                    btn.setOnAction( ( ActionEvent event ) ->
+                                            {
+                                            	BookDto member = getTableView().getItems().get( getIndex() );
+                                                try {
+													//switchToEditMode(member);
+												} catch (Exception e) {
+													// TODO Auto-generated catch block
+													e.printStackTrace();
+												}
+                                    } );
+                                    setGraphic( btn );
+                                    setText( null );
+                                }
+                            }
+                        };
+                        return cell;
+                    }
+                };
+        this.action.setCellFactory( cellFactory );
 	}
 }
