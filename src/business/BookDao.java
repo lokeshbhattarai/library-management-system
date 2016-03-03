@@ -43,6 +43,31 @@ public class BookDao {
 		return caseHit;
 	}
 
+	public BookDto getBook(String bookIsbn){
+		List<BookDto> bookList;
+		try {
+			bookList = (List<BookDto>)reader.read();
+			if(bookList == null){
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		Iterator<BookDto> itr = bookList.iterator();
+		BookDto caseHit = null;
+		
+		while(itr.hasNext()){
+			BookDto book = itr.next();
+			if(book.getIsbn().equals(bookIsbn)){
+				caseHit = book;;
+				break;
+			}
+			
+		}
+		return caseHit;
+	}
+	
 	public List<BookCopyDto> getListOfCopiesAvailable(String bookIsbn) throws Exception{
 		List<BookDto> bookList = (List<BookDto>)reader.read();
 		Iterator<BookDto> itr = bookList.iterator();

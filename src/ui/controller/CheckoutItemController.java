@@ -10,6 +10,7 @@ import business.LibraryMemberDao;
 import dataaccess.FilePath;
 import dataaccess.storage.AuthorDto;
 import dataaccess.storage.BookCopyDto;
+import dataaccess.storage.BookDto;
 import dataaccess.storage.CheckoutEntryDto;
 import dataaccess.storage.CheckoutRecordDto;
 import dataaccess.storage.LibraryMemberDto;
@@ -57,6 +58,7 @@ public class CheckoutItemController {
 
 		if(memberId.isEmpty() || bookIsbn.isEmpty()){
 			showAlert("Required field is empty.");
+			return;
 
 		}else{
 			/*
@@ -117,34 +119,46 @@ public class CheckoutItemController {
 					        });
 
 
-						ObservableList<AuthorDto> authors = getInitialAuthorData();
+						BookDto book = bookDao.getBook(bookIsbn);
+						labelBookName.setText(book.getTitle());
+						
+						if(book!=null){
+							List<AuthorDto> authorList = book.getAuthors();
+							if(authorList!=null){
+								ObservableList<AuthorDto> authors = FXCollections.observableList(authorList);
+								listAuthor.setItems(authors);
 
-						listAuthor.setItems(authors);
+								listAuthor.setCellFactory(new Callback<ListView<AuthorDto>, ListCell<AuthorDto>>(){
 
-						listAuthor.setCellFactory(new Callback<ListView<AuthorDto>, ListCell<AuthorDto>>(){
+							            @Override
+							            public ListCell<AuthorDto> call(ListView<AuthorDto> p) {
 
-					            @Override
-					            public ListCell<AuthorDto> call(ListView<AuthorDto> p) {
+							                ListCell<AuthorDto> cell = new ListCell<AuthorDto>(){
 
-					                ListCell<AuthorDto> cell = new ListCell<AuthorDto>(){
+							                    @Override
+							                    protected void updateItem(AuthorDto t, boolean bln) {
+							                        super.updateItem(t, bln);
+							                        if (t != null) {
+							                            setText(t.getFirstName()+" " + t.getLastName());
+							                        }
+							                    }
 
-					                    @Override
-					                    protected void updateItem(AuthorDto t, boolean bln) {
-					                        super.updateItem(t, bln);
-					                        if (t != null) {
-					                            setText(t.getFirstName()+" " + t.getLastName());
-					                        }
-					                    }
+							                };
 
-					                };
+							                return cell;
+							            }
+							        });
 
-					                return cell;
-					            }
-					        });
-
+							}else{
+								listAuthor.getItems().clear();
+								System.out.println("No authors found for this book");
+							}
+						}
+						
 
 					}else{
 						showAlert("No copies of the book are available for checkout.");
+						hideCheckoutFields();
 					}
 
 				}else{
@@ -238,6 +252,8 @@ public class CheckoutItemController {
 		 labelAuthor.setVisible(false);
 		 labelCopies.setVisible(false);
 		 buttonCheckout.setVisible(false);
+		 listAuthor.setVisible(true);
+		 listBookCopy.setVisible(true);
 	}
 
 	public void showCheckoutFields(){
@@ -246,14 +262,16 @@ public class CheckoutItemController {
 		 labelAuthor.setVisible(true);
 		 labelCopies.setVisible(true);
 		 buttonCheckout.setVisible(true);
-		 listAuthor.setVisible(true);
-		 listBookCopy.setVisible(true);
+		 listAuthor.setVisible(false);
+		 listBookCopy.setVisible(false);
 	}
 
 	public void resetInputFields(){
 		System.out.println("clear the fields");
 		textFieldMemberId.clear();
 		textFieldBookIsbn.clear();
+		listAuthor.getItems().clear();
+		listBookCopy.getItems().clear();
 		hideCheckoutFields();
 	}
 

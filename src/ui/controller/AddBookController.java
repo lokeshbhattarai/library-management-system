@@ -58,21 +58,21 @@ public class AddBookController {
 	@FXML TextField city;
 	@FXML TextField state;
 	@FXML TextField zipcode;
-	
-	
+
+
 	private BookDao book;
 	private List<BookDto>books;
 	static List<AuthorDto> authordto;
 	static AddressDto address;
 	List<BookDto> bookData=null;
-	
+
 	public AddBookController(){
 		book = new BookDao(FilePath.BOOK_RECORD);
 		authordto = new ArrayList<AuthorDto>();
 		//readListBook(books);
 		Object data;
 		try {
-			
+
 			data = book.getBookList();
 			//System.out.println("test1");
 		if(data == null){
@@ -132,7 +132,7 @@ public class AddBookController {
 			alert.showAndWait();
 		}
 		readListBook();
-		
+
 	}
 	public void addAuthor(){
 		address = new AddressDto(this.street.getText().trim(),
@@ -140,10 +140,10 @@ public class AddBookController {
 				this.state.getText().trim(),
 				this.zipcode.getText().trim());
 		authordto.add(new AuthorDto(firstname.getText(), lastname.getText(), shortBio.getText(), address, phone.getText()));
-		
-		// add author info close	
+
+		// add author info close
 		Stage stage = (Stage) save.getScene().getWindow();
-	    stage.close();	
+	    stage.close();
 	}
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void readListBook(){
@@ -166,10 +166,10 @@ public class AddBookController {
                 ObservableValue<String>>() {
 					@Override
 					public ObservableValue<String> call(CellDataFeatures<BookDto, String> data){
-						String authors =  data.getValue().getAuthors().size()+"";
-						
+						String authors =  "";
+
 						for (AuthorDto author : data.getValue().getAuthors()) {
-							//authors += author.getFirstName()+" "+author.getLastName()+"\n";
+							authors += author.getFirstName()+" "+author.getLastName()+"\n";
 						}
 						StringProperty p = new SimpleStringProperty(authors);
 						return p;
@@ -178,7 +178,7 @@ public class AddBookController {
 			//for (BookDto o : books) {
 				//System.out.println(o.);
 			//}
-			
+
 
 	}
 	public void showAddBookAuthorWondow() throws IOException{
@@ -186,10 +186,10 @@ public class AddBookController {
 		System.out.println("no error");
 		Parent root1 = null;
 		root1 = fxmlLoader.load();
-		
+
 		AddAuthorInfoController authorController = fxmlLoader.<AddAuthorInfoController>getController();
 		authorController.setAuthor(authordto);
-		
+
 		System.out.println(root1);
 		Stage stage = new Stage();
 		//Scene scene = new Scene(root1);
