@@ -44,6 +44,7 @@ public class AddBookController {
 	@FXML TextField id;
 	@FXML TextField ISBN;
 	@FXML TextField CopyNumber;
+	@FXML TextField clength;
 	@FXML TableView<BookDto> table;
 	@FXML TableColumn c0;
 	@FXML TableColumn c1;
@@ -109,7 +110,7 @@ public class AddBookController {
 				System.out.println("author list");
 				System.out.println(authorDto2.getFirstName()+" "+authorDto2.getLastName()+" "+authorDto2.getAddress());
 			}
-		BookDto booka = new BookDto(authordto, title.getText(), ISBN.getText(),CopyNumber.getText());
+		BookDto booka = new BookDto(authordto, title.getText(), ISBN.getText(),CopyNumber.getText(),Integer.parseInt(clength.getText()));
 		List<BookCopyDto> copies = new ArrayList<BookCopyDto>();
 		for (int i = 0; i < Integer.parseInt(CopyNumber.getText()); i++) {
 			copies.add(new BookCopyDto(UUID.randomUUID(), booka));
@@ -127,7 +128,7 @@ public class AddBookController {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error occurred.");
 			alert.setHeaderText(null);
-			alert.setContentText(ex.getMessage());
+			alert.setContentText("the book is not Added\n please try again");
 
 			alert.showAndWait();
 		}
@@ -186,17 +187,16 @@ public class AddBookController {
 		System.out.println("no error");
 		Parent root1 = null;
 		root1 = fxmlLoader.load();
-
-		AddAuthorInfoController authorController = fxmlLoader.<AddAuthorInfoController>getController();
-		authorController.setAuthor(authordto);
-
 		System.out.println(root1);
 		Stage stage = new Stage();
 		//Scene scene = new Scene(root1);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.DECORATED);
-        stage.setTitle("Add Library Member");
+        stage.setTitle("Add Author Information");
         stage.setScene(new Scene(root1));
         stage.show();
+        AddAuthorInfoController authorController = fxmlLoader.<AddAuthorInfoController>getController();
+		authorController.setAuthor(authordto);
+		
 	}
 }

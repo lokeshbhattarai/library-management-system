@@ -9,7 +9,7 @@
 <AnchorPane prefHeight="453.0" prefWidth="708.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.controller.AddBookController">
    <children>
      
-      <Button layoutX="190.0" layoutY="223.0" mnemonicParsing="false" onAction="#validate" text="Add" />
+      <Button layoutX="190.0" layoutY="248.0" mnemonicParsing="false" onAction="#validate" text="Add" />
       <Label layoutX="122.0" layoutY="27.0" prefHeight="36.0" prefWidth="320.0" styleClass="headertitle" text="Add Book">
          <font>
             <Font name="System Bold" size="24.0" />
@@ -19,7 +19,7 @@
       <Label layoutX="137.0" layoutY="177.0" text="Copy Number" />
       <TextField fx:id="ISBN" layoutX="242.0" layoutY="139.0" />
       <TextField fx:id="CopyNumber" layoutX="242.0" layoutY="173.0" />
-      <Button layoutX="298.0" layoutY="223.0" mnemonicParsing="false" text="Cancel" />
+      <Button layoutX="302.0" layoutY="248.0" mnemonicParsing="false" text="Cancel" />
       <TextField fx:id="title" layoutX="242.0" layoutY="98.0" />
       <TableView fx:id="table" layoutX="8.0" layoutY="271.0" prefHeight="124.0" prefWidth="693.0" visible="false">
         <columns>
@@ -32,5 +32,7 @@
       </TableView>
       <TextField fx:id="id" editable="false" layoutX="242.0" layoutY="63.0" visible="false" />
       <Button layoutX="465.0" layoutY="98.0" mnemonicParsing="false" onAction="#showAddBookAuthorWondow" text="Add Author Information" />
+      <Label layoutX="93.0" layoutY="218.0" text="Max. Checkout Length" />
+      <TextField fx:id="clength" layoutX="242.0" layoutY="215.0" />
    </children>
 </AnchorPane>
