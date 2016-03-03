@@ -22,32 +22,31 @@ public class CheckoutRecordDao {
 		
 		List<CheckoutRecordDto> checkoutRecordList = getAllCheckoutRecords();
 		
-		Iterator<CheckoutRecordDto> itrCheckoutRecord = checkoutRecordList.iterator();
-		
-		if(itrCheckoutRecord.hasNext()){
-			while(itrCheckoutRecord.hasNext()){
-				
-				CheckoutRecordDto checkoutRecordDto = itrCheckoutRecord.next();
-				
-				if(checkoutRecordDto.getLibraryMemberDto().equals(libraryMember)){
-					//update the record
-					checkoutRecordDto.getCheckoutEntryDtos().add(checkoutEntryDto);
-					dataReader.write(checkoutRecordList);
-					break;
-				}
-			}
-		}else{
+		if(checkoutRecordList==null){
 			//create new record and save it
-			CheckoutRecordDto checkoutRecord= new CheckoutRecordDto(libraryMember);
-			List<CheckoutEntryDto> checkoutEntryList = new ArrayList<CheckoutEntryDto>();
-			checkoutEntryList.add(checkoutEntryDto);
+			createAndSaveNewRecord(checkoutEntryDto, libraryMember); 
+		}else{
+			Iterator<CheckoutRecordDto> itrCheckoutRecord = checkoutRecordList.iterator();
 			
-			checkoutRecord.setCheckoutEntryDtos(checkoutEntryList);
-			
-			List<CheckoutRecordDto> checkoutRecList = new ArrayList<>();
-			checkoutRecList.add(checkoutRecord);
-			dataReader.write(checkoutRecList);
+			if(itrCheckoutRecord.hasNext()){
+				while(itrCheckoutRecord.hasNext()){
+					
+					CheckoutRecordDto checkoutRecordDto = itrCheckoutRecord.next();
+					
+					if(checkoutRecordDto.getLibraryMemberDto().equals(libraryMember)){
+						//update the record
+						checkoutRecordDto.getCheckoutEntryDtos().add(checkoutEntryDto);
+						dataReader.write(checkoutRecordList);
+						break;
+					}
+				}
+			}else{
+				//create new record and save it
+				createAndSaveNewRecord(checkoutEntryDto, libraryMember); 
+			}
 		}
+		
+		
 		
 		/*try {
 			List<CheckoutRecordDto> checkoutRecList = new ArrayList<>();
@@ -59,6 +58,17 @@ public class CheckoutRecordDao {
 		}*/
 	}
 	
+	private void createAndSaveNewRecord(CheckoutEntryDto checkoutEntryDto, LibraryMemberDto libraryMember){
+		CheckoutRecordDto checkoutRecord= new CheckoutRecordDto(libraryMember);
+		List<CheckoutEntryDto> checkoutEntryList = new ArrayList<CheckoutEntryDto>();
+		checkoutEntryList.add(checkoutEntryDto);
+		
+		checkoutRecord.setCheckoutEntryDtos(checkoutEntryList);
+		
+		List<CheckoutRecordDto> checkoutRecList = new ArrayList<>();
+		checkoutRecList.add(checkoutRecord);
+		dataReader.write(checkoutRecList);
+	}
 	
 	public List<CheckoutRecordDto> getAllCheckoutRecords(){
 		try {

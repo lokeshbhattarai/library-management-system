@@ -48,7 +48,7 @@ public class ParentWindowController {
 	}
 
 	public void showAddLibraryMemberWondow() throws IOException{
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ui/AddLibrarymember.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ui/AddLibraryMember.fxml"));
 
 		Parent root1 = null;
 		root1 = (Parent)fxmlLoader.load();
