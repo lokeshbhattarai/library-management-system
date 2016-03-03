@@ -59,6 +59,7 @@ public class AddBookController {
 	@FXML TextField city;
 	@FXML TextField state;
 	@FXML TextField zipcode;
+	@FXML Button buttonCancelWindow;
 
 
 	private BookDao book;
@@ -66,6 +67,7 @@ public class AddBookController {
 	static List<AuthorDto> authordto;
 	static AddressDto address;
 	List<BookDto> bookData=null;
+	
 
 	public AddBookController(){
 		book = new BookDao(FilePath.BOOK_RECORD);
@@ -135,6 +137,11 @@ public class AddBookController {
 		readListBook();
 
 	}
+	
+	public void closeAddBookWindow(){
+		((Stage)buttonCancelWindow.getScene().getWindow()).close();;
+	}
+	
 	public void addAuthor(){
 		address = new AddressDto(this.street.getText().trim(),
 				this.city.getText().trim(),
