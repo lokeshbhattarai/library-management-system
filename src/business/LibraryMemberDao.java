@@ -1,9 +1,13 @@
 package business;
 
+import java.lang.invoke.LambdaConversionException;
 import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import com.sun.javafx.collections.ObservableSetWrapper;
 
 import dataaccess.DataReader;
 import dataaccess.storage.CheckoutEntryDto;
@@ -20,14 +24,17 @@ public class LibraryMemberDao {
 		reader.write(member);
 	}
 	
-	public boolean doesMemberExist(String memberId){
-		LibraryMemberDto member = getLibraryMember(memberId);
+	public boolean doesMemberExist(String memberId) throws Exception{
+		/*LibraryMemberDto member = getLibraryMember(memberId);
 		if(member == null){
 			return false;
 		}
 		else{
 			return true;
-		}
+		}*/
+		
+		boolean existance = getMemberList().stream().anyMatch(x -> x.getMemberId() == memberId);
+		return existance;
 	}
 
 	//check if the member can checkout book..if he already has some overdue book then he can not checkout another one
@@ -83,6 +90,22 @@ public class LibraryMemberDao {
 		}
 		else{
 			return (List<LibraryMemberDto>)reader.read();
+		}
+	}
+	
+	public List<LibraryMemberDto> getMemberList(LibraryMemberDto member) throws Exception{
+		Object data = reader.read();
+		if(data == null){
+			return new ArrayList<LibraryMemberDto>();
+		}
+		else{
+			List<LibraryMemberDto> members = (List<LibraryMemberDto>)reader.read();
+			
+			List<LibraryMemberDto> filtered = members.stream()
+			.filter(LambdaLibrary.getMemberPredicate(member))
+			.collect(Collectors.toList());
+			
+			return filtered;
 		}
 	}
 	

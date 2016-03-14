@@ -29,11 +29,19 @@ import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import business.LibraryMemberDao;
 import dataaccess.FilePath;
+import dataaccess.storage.AddressDto;
 import dataaccess.storage.LibraryMemberDto;
 
 public class DisplayLibraryMemberController {
 
 	@FXML TableView<LibraryMemberDto> libraryMemberTable;
+	@FXML TextField firstName;
+	@FXML TextField lastName;
+	@FXML TextField phoneNo;
+	@FXML TextField stateName;
+	@FXML TextField cityName;
+	@FXML TextField zipCodeName;
+	
 	@FXML TableColumn state;
 	@FXML TableColumn city;
 	@FXML TableColumn street;
@@ -50,9 +58,19 @@ public class DisplayLibraryMemberController {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void SearchMembers() throws Exception{
+		
+		AddressDto address = new AddressDto("", 
+											this.cityName.getText().trim(), 
+											this.stateName.getText().trim(), 
+											this.zipCodeName.getText().trim());
+		LibraryMemberDto filter = new LibraryMemberDto(null, 
+														this.firstName.getText().trim(),
+														this.lastName.getText().trim(), 
+														address, 
+														this.phoneNo.getText().trim());
 
 		List<LibraryMemberDto> members = null;
-		members = libraryMember.getMemberList();
+		members = libraryMember.getMemberList(filter);
 
 		list = FXCollections.observableArrayList();
 		for (LibraryMemberDto libraryMemberDto : members) {

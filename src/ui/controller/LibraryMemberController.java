@@ -86,7 +86,7 @@ public class LibraryMemberController implements Initializable {
 		}
 	}
 
-	public void add(){
+	public void add() throws Exception{
 		if(memberManager.doesMemberExist(this.memberId.getText().trim())){
 			showMessage("Member Id [" + this.memberId.getText().trim() + "] already exists.\n\nPlease check." );
 			return;
