@@ -34,6 +34,9 @@ public class LibraryMemberDao {
 			return true;
 		}*/
 
+		/*
+		 * changing above imperative style to declarative style using stream/lambdas
+		 */
 		boolean existance = getMemberList().stream().anyMatch(x -> x.getMemberId() == memberId);
 		return existance;
 	}
@@ -95,6 +98,9 @@ public class LibraryMemberDao {
 	}
 
 	public List<LibraryMemberDto> getMemberList(LibraryMemberDto member) throws Exception{
+		/*
+		 * producing search results based on user filter criterion by using lambdas library
+		 */
 		Object data = reader.read();
 		if(data == null){
 			return new ArrayList<LibraryMemberDto>();
