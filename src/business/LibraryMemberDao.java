@@ -13,6 +13,7 @@ import dataaccess.DataReader;
 import dataaccess.storage.CheckoutEntryDto;
 import dataaccess.storage.LibraryMemberDto;
 
+@SuppressWarnings("unchecked")
 public class LibraryMemberDao {
 	private dataaccess.DataReader reader;
 
@@ -23,7 +24,7 @@ public class LibraryMemberDao {
 	public void addMember(List<LibraryMemberDto> member){
 		reader.write(member);
 	}
-	
+
 	public boolean doesMemberExist(String memberId) throws Exception{
 		/*LibraryMemberDto member = getLibraryMember(memberId);
 		if(member == null){
@@ -32,7 +33,7 @@ public class LibraryMemberDao {
 		else{
 			return true;
 		}*/
-		
+
 		boolean existance = getMemberList().stream().anyMatch(x -> x.getMemberId() == memberId);
 		return existance;
 	}
@@ -41,9 +42,9 @@ public class LibraryMemberDao {
 	public boolean canUserCheckoutBook(String memberId){
 		return true;
 	}
-	
+
 	public void updateCheckoutRecord(CheckoutEntryDto checkoutEntryDto, LibraryMemberDto libraryMember){
-		
+
 		try {
 			List<LibraryMemberDto> memberList = getMemberList();
 			Iterator<LibraryMemberDto> itrMembers = memberList.iterator();
@@ -55,14 +56,14 @@ public class LibraryMemberDao {
 					}
 				}
 			}
-			
+
 			addMember(memberList);
 		} catch (Exception e) {
 		}
-		
-		
+
+
 	}
-	
+
 	public boolean doesUserExist(String memberId){
 		List<LibraryMemberDto> totalMembers;
 		boolean doesUserExist = false;
@@ -92,7 +93,7 @@ public class LibraryMemberDao {
 			return (List<LibraryMemberDto>)reader.read();
 		}
 	}
-	
+
 	public List<LibraryMemberDto> getMemberList(LibraryMemberDto member) throws Exception{
 		Object data = reader.read();
 		if(data == null){
@@ -100,15 +101,15 @@ public class LibraryMemberDao {
 		}
 		else{
 			List<LibraryMemberDto> members = (List<LibraryMemberDto>)reader.read();
-			
+
 			List<LibraryMemberDto> filtered = members.stream()
 			.filter(LambdaLibrary.getMemberPredicate(member))
 			.collect(Collectors.toList());
-			
+
 			return filtered;
 		}
 	}
-	
+
 	public LibraryMemberDto getLibraryMember(String memberId){
 		List<LibraryMemberDto> totalMembers;
 		LibraryMemberDto memberAsked = null;;
@@ -127,6 +128,6 @@ public class LibraryMemberDao {
 			}
 		}
 		return memberAsked;
-	} 
-	
+	}
+
 }

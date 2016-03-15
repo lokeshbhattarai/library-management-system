@@ -32,6 +32,7 @@ import dataaccess.FilePath;
 import dataaccess.storage.AddressDto;
 import dataaccess.storage.LibraryMemberDto;
 
+@SuppressWarnings("unchecked")
 public class DisplayLibraryMemberController {
 
 	@FXML TableView<LibraryMemberDto> libraryMemberTable;
@@ -41,7 +42,7 @@ public class DisplayLibraryMemberController {
 	@FXML TextField stateName;
 	@FXML TextField cityName;
 	@FXML TextField zipCodeName;
-	
+
 	@FXML TableColumn state;
 	@FXML TableColumn city;
 	@FXML TableColumn street;
@@ -58,15 +59,15 @@ public class DisplayLibraryMemberController {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void SearchMembers() throws Exception{
-		
-		AddressDto address = new AddressDto("", 
-											this.cityName.getText().trim(), 
-											this.stateName.getText().trim(), 
+
+		AddressDto address = new AddressDto("",
+											this.cityName.getText().trim(),
+											this.stateName.getText().trim(),
 											this.zipCodeName.getText().trim());
-		LibraryMemberDto filter = new LibraryMemberDto(null, 
+		LibraryMemberDto filter = new LibraryMemberDto(null,
 														this.firstName.getText().trim(),
-														this.lastName.getText().trim(), 
-														address, 
+														this.lastName.getText().trim(),
+														address,
 														this.phoneNo.getText().trim());
 
 		List<LibraryMemberDto> members = null;
@@ -173,6 +174,13 @@ public class DisplayLibraryMemberController {
 	}
 
 	public void clearResults(){
+		this.firstName.clear();
+		this.lastName.clear();
+		this.phoneNo.clear();
+		this.stateName.clear();
+		this.cityName.clear();
+		this.zipCodeName.clear();
+
 		if(list != null)
 			list.clear();
 	}
